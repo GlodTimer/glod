@@ -1,5 +1,13 @@
-import { createStore, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
-import rootReducer from "../reducers/index";
+import { combineReducers } from "redux";
 
-export default createStore(rootReducer, applyMiddleware(thunk));
+import { timerReducer } from "./Timer/reducer";
+import { TimerState } from "./Timer/types";
+
+export interface ApplicationState {
+  timer: TimerState;
+}
+
+export const createRootReducer = () =>
+  combineReducers({
+    timer: timerReducer
+  });

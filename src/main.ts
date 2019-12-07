@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, globalShortcut } from "electron";
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -22,6 +22,17 @@ const createWindow = () => {
     transparent: true,
     hasShadow: false
   });
+
+  if (process.env.ENVIRONMENT === "dev") {
+    const {
+      default: installExtension,
+      REDUX_DEVTOOLS,
+      REACT_DEVELOPER_TOOLS
+    } = require("electron-devtools-installer");
+
+    installExtension(REDUX_DEVTOOLS);
+    installExtension(REACT_DEVELOPER_TOOLS);
+  }
 
   // and load the index.html of the app.
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);

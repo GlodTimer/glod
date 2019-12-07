@@ -1,17 +1,18 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { setIsRunning } from "../actions/timer";
+import { setIsRunning } from "../store/Timer/actions";
+import { remote } from "electron";
 
 interface AppProps {
   dispatch?: any;
   isRunning: boolean;
 }
 type ReducerType = {
-  timerReducer: any;
+  timer: any;
 };
 
-@(connect(({ timerReducer }: ReducerType) => {
-  const { isRunning } = timerReducer;
+@(connect(({ timer }: ReducerType) => {
+  const { isRunning } = timer;
   return {
     isRunning
   };
@@ -20,8 +21,24 @@ class App extends React.Component<AppProps, any> {
   static defaultProps = {
     isRunning: false
   };
+
   constructor(props: AppProps) {
     super(props);
+  }
+
+  componentDidMount() {
+    const { globalShortcut } = remote;
+    globalShortcut.register("Cmd+g", this.handleClick);
+
+    window.addEventListener("beforeunload", () => {
+      remote.globalShortcut.unregisterAll();
+    });
+  }
+
+  componentWillUnmount() {
+    const { globalShortcut } = remote;
+
+    globalShortcut.unregisterAll();
   }
 
   handleClick = () => {
@@ -31,7 +48,6 @@ class App extends React.Component<AppProps, any> {
   };
 
   render() {
-    console.log(this.props);
     return (
       <div>
         <button onClick={this.handleClick}>Clicky</button>
