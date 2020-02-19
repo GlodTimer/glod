@@ -1,12 +1,18 @@
-import * as React from "react";
-import { connect } from "react-redux";
-import { setIsRunning } from "../store/Timer/actions";
-import { remote } from "electron";
+import * as React from 'react';
+import { connect } from 'react-redux';
+import { remote } from 'electron';
+
+import { setIsRunning } from '../store/Timer/actions';
+import Segment from './Segment';
+
+import './styles.css';
+import { app } from './styles.css';
 
 interface AppProps {
   dispatch?: any;
   isRunning: boolean;
 }
+
 type ReducerType = {
   timer: any;
 };
@@ -26,32 +32,31 @@ class App extends React.Component<AppProps, any> {
     super(props);
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     const { globalShortcut } = remote;
-    globalShortcut.register("Cmd+g", this.handleClick);
+    globalShortcut.register('Cmd+g', this.handleClick);
 
-    window.addEventListener("beforeunload", () => {
+    window.addEventListener('beforeunload', () => {
       remote.globalShortcut.unregisterAll();
     });
   }
 
-  componentWillUnmount() {
+  componentWillUnmount(): void {
     const { globalShortcut } = remote;
 
     globalShortcut.unregisterAll();
   }
 
-  handleClick = () => {
+  handleClick = (): void => {
     const { dispatch, isRunning } = this.props;
 
     dispatch(setIsRunning(!isRunning));
   };
 
-  render() {
+  render(): React.ReactNode {
     return (
-      <div>
-        <button onClick={this.handleClick}>Clicky</button>
-        <div>{this.props.isRunning.toString()}</div>
+      <div className={app}>
+        <Segment name="Stasis" />
       </div>
     );
   }

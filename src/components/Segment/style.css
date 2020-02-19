@@ -1,0 +1,12 @@
+.segment {
+  display: flex;
+  padding: 1rem;
+}
+
+.segment__comparison {
+  margin-left: auto;
+}
+
+.segment__endedAt {
+  margin-left: 1rem;
+}
