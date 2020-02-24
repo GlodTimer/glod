@@ -1,12 +1,25 @@
 .segment {
   display: flex;
   padding: 1rem;
-}
+  border-bottom: 1px solid #474748;
+} /* .segment */
 
 .segment__comparison {
   margin-left: auto;
+} /* .segment__comparison */
+
+.segment__comparison--green {
+  color: green;
+} /* .segment__comparison--green */
+
+.segment__comparison--red {
+  color: red;
+}
+
+.segment__comparison--gold {
+  color: gold;
 }
 
 .segment__endedAt {
   margin-left: 1rem;
-}
+} /* .segment__endedAt */

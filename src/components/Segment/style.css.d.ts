@@ -2,8 +2,14 @@ declare namespace StyleCssModule {
   export interface IStyleCss {
     segment: string;
     segmentComparison: string;
+    segmentComparisonGold: string;
+    segmentComparisonGreen: string;
+    segmentComparisonRed: string;
     segmentEndedAt: string;
     segment__comparison: string;
+    "segment__comparison--gold": string;
+    "segment__comparison--green": string;
+    "segment__comparison--red": string;
     segment__endedAt: string;
   }
 }
