@@ -14,11 +14,11 @@
 
 .segment__comparison--red {
   color: red;
-}
+} /* .segment__comparison--red */
 
 .segment__comparison--gold {
   color: gold;
-}
+} /* .segment__comparison--gold */
 
 .segment__endedAt {
   margin-left: 1rem;
